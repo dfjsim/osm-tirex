@@ -1,0 +1,49 @@
+services:
+  osm-tirex:
+    build:
+      context: .
+      shm_size: '2GB'
+    shm_size: '2GB'
+    image: "osm-tirex"
+    restart: unless-stopped
+    ports:
+      - 8000:80
+      - 8080:8080
+      # - 5432:5432
+    volumes:
+      - data:/data/database/
+      - tiles:/data/tiles/
+      - style:/data/style/
+      - config:/data/config/
+      # - /tmp/prince-edward-island-latest.osm.pbf:/data/region.osm.pbf
+      # - /home/osm/osm-downloads/:/data/downloads/
+      - /home/osm/osm-downloads/north-america-latest.osm.pbf:/data/region.osm.pbf:ro,z
+    environment:
+      # - FLAT_NODES=enabled
+      # Safer large-extract import profile for this VM:
+      # - DROP skips persistent slim-table indexes that are only needed for updates
+      # - --disable-parallel-indexing avoids the high-RAM postprocessing spike
+      - THREADS=8
+      - CACHE=8000
+      - DROP=enabled
+      # - OSM2PGSQL_EXTRA_ARGS=--disable-parallel-indexing
+      #cpuset: 28-31
+      #mem_limit: 16GB
+      # deploy:
+      #     resources:
+      #         limits:
+      #           cpus: '4.00'
+      #           memory: 16GB
+      # reservations:
+      #   cpus: 0.25
+      #   memory: 128M
+
+    # command: "import"
+    command: "run"
+    # command: "debug"
+
+volumes:
+  data:
+  tiles:
+  style:
+  config:
