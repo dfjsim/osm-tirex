@@ -1,0 +1,15 @@
+osm-tirex
+
+This repository includes work derived from:
+
+  openstreetmap-tile-server
+  Copyright 2019 Alexander Overvoorde
+  Licensed under the Apache License, Version 2.0
+  https://www.apache.org/licenses/LICENSE-2.0
+
+Modifications and additional work in this repository:
+
+  Copyright (c) 2026 dfjs1m
+
+This NOTICE file is provided for attribution purposes only and does not modify
+the terms of the Apache License, Version 2.0.
